@@ -19,4 +19,7 @@ public:
 
 public:
 	TSharedPtr<FUICommandInfo> OpenCppEditor;
+	TSharedPtr<FUICommandInfo> BuildProject;
+	TSharedPtr<FUICommandInfo> CancelBuild;
+	TSharedPtr<FUICommandInfo> ShowBuildErrors;
 };

@@ -7,6 +7,7 @@
 #include "Widgets/Input/SMultiLineEditableText.h"
 #include "Widgets/Views/STreeView.h"
 #include "Widgets/Input/SSearchBox.h"
+#include "BuildError.h"
 
 struct FCodeFileItem
 {
@@ -33,6 +34,9 @@ public:
     /** Widget constructor */
     void Construct(const FArguments& InArgs);
 
+    /** Sets the errors for the current file */
+    void SetErrors(const TArray<TSharedPtr<FBuildError>>& InErrors);
+
 private:
     /** Text editor widget */
     TSharedPtr<SMultiLineEditableText> CodeEditor;
@@ -45,6 +49,9 @@ private:
     
     /** Currently loaded file path */
     FString CurrentFilePath;
+
+    /** Current errors for the loaded file */
+    TArray<TSharedPtr<FBuildError>> CurrentFileErrors;
 
     /** Refreshes the file tree */
     void RefreshFileTree();
@@ -69,4 +76,10 @@ private:
     
     /** Creates a syntax highlighter for C++ code */
     TSharedPtr<class FTextSyntaxHighlighter> CreateCppSyntaxHighlighter();
+
+    /** Gets the text to display in a tooltip for the given line number */
+    FText GetLineToolTip(int32 LineNumber) const;
+
+    /** Gets the color for a line marker based on errors */
+    FSlateColor GetLineMarkerColor(int32 LineNumber) const;
 };

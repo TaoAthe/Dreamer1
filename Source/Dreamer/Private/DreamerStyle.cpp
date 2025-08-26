@@ -44,6 +44,16 @@ TSharedRef<FSlateStyleSet> FDreamerStyle::CreateStyleSet()
 	// Icon for the plugin button
 	Style->Set("Dreamer.OpenCppEditor", new IMAGE_BRUSH(TEXT("ButtonIcon_40x"), FVector2D(40.0f, 40.0f)));
 	Style->Set("Dreamer.OpenCppEditor.Small", new IMAGE_BRUSH(TEXT("ButtonIcon_40x"), FVector2D(20.0f, 20.0f)));
+	
+	// Icons for build actions
+	Style->Set("Dreamer.BuildProject", new IMAGE_BRUSH(TEXT("BuildIcon_40x"), FVector2D(40.0f, 40.0f)));
+	Style->Set("Dreamer.BuildProject.Small", new IMAGE_BRUSH(TEXT("BuildIcon_40x"), FVector2D(20.0f, 20.0f)));
+	
+	Style->Set("Dreamer.CancelBuild", new IMAGE_BRUSH(TEXT("CancelBuildIcon_40x"), FVector2D(40.0f, 40.0f)));
+	Style->Set("Dreamer.CancelBuild.Small", new IMAGE_BRUSH(TEXT("CancelBuildIcon_40x"), FVector2D(20.0f, 20.0f)));
+	
+	Style->Set("Dreamer.ShowBuildErrors", new IMAGE_BRUSH(TEXT("ErrorListIcon_40x"), FVector2D(40.0f, 40.0f)));
+	Style->Set("Dreamer.ShowBuildErrors.Small", new IMAGE_BRUSH(TEXT("ErrorListIcon_40x"), FVector2D(20.0f, 20.0f)));
 
 	return Style;
 }

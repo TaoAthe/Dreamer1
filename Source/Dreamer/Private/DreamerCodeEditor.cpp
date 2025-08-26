@@ -263,14 +263,56 @@ void SDreamerCodeEditor::Construct(const FArguments& InArgs)
                 .BorderImage(FEditorStyle::GetBrush("ToolPanel.GroupBorder"))
                 .Padding(4.0f)
                 [
-                    SAssignNew(CodeEditor, SMultiLineEditableText)
-                    .Text(FText::FromString(TEXT("")))
-                    .TextStyle(FEditorStyle::Get(), "TextEditor.NormalText")
-                    .Marshaller(SyntaxHighlighter)
-                    .AutoWrapText(false)
-                    .WrappingPolicy(ETextWrappingPolicy::NoWrap)
-                    .AllowContextMenu(true)
-                    .IsReadOnly(false)
+                    SNew(SHorizontalBox)
+                    
+                    // Line markers (for errors)
+                    + SHorizontalBox::Slot()
+                    .AutoWidth()
+                    [
+                        SNew(SBox)
+                        .WidthOverride(16.0f)
+                        [
+                            SNew(SScrollBox)
+                            .Orientation(Orient_Vertical)
+                            .ScrollBarAlwaysVisible(false)
+                            .ConsumeMouseWheel(EConsumeMouseWheel::Never)
+                            
+                            + SScrollBox::Slot()
+                            [
+                                SNew(SVerticalBox)
+                                .Visibility_Lambda([this]() { return CurrentFileErrors.Num() > 0 ? EVisibility::Visible : EVisibility::Hidden; })
+                                
+                                // Generate line markers for each line in the document
+                                // This is a simplified approach - a more robust implementation would
+                                // dynamically create these markers based on the visible lines
+                                + SVerticalBox::Slot()
+                                .AutoHeight()
+                                [
+                                    SNew(STextBlock)
+                                    .Text(FText::FromString(TEXT("1")))
+                                    .ColorAndOpacity(this, &SDreamerCodeEditor::GetLineMarkerColor, 1)
+                                    .ToolTipText(this, &SDreamerCodeEditor::GetLineToolTip, 1)
+                                ]
+                                
+                                // Repeat for more lines - this is simplified
+                                // In practice, you would generate these dynamically based on the document
+                            ]
+                        ]
+                    ]
+                    
+                    // Code editor
+                    + SHorizontalBox::Slot()
+                    .FillWidth(1.0f)
+                    [
+                        SAssignNew(CodeEditor, SMultiLineEditableText)
+                        .Text(FText::FromString(TEXT("")))
+                        .TextStyle(FEditorStyle::Get(), "TextEditor.NormalText")
+                        .Marshaller(SyntaxHighlighter)
+                        .AutoWrapText(false)
+                        .WrappingPolicy(ETextWrappingPolicy::NoWrap)
+                        .AllowContextMenu(true)
+                        .IsReadOnly(false)
+                    ]
                 ]
             ]
         ]
@@ -487,6 +529,71 @@ TSharedPtr<FTextSyntaxHighlighter> SDreamerCodeEditor::CreateCppSyntaxHighlighte
 {
     // This is now handled by our custom FCppSyntaxHighlighter class
     return nullptr;
+}
+
+void SDreamerCodeEditor::SetErrors(const TArray<TSharedPtr<FBuildError>>& InErrors)
+{
+    CurrentFileErrors.Empty();
+    
+    // Filter errors for the current file
+    for (const TSharedPtr<FBuildError>& Error : InErrors)
+    {
+        if (Error->GetFilePath() == CurrentFilePath)
+        {
+            CurrentFileErrors.Add(Error);
+        }
+    }
+    
+    // The editor needs to be refreshed to show the error markers
+    if (CodeEditor.IsValid())
+    {
+        // This is a simplified approach - ideally you would redraw only the line markers
+        // rather than forcing a full refresh
+        CodeEditor->Refresh();
+    }
+}
+
+FText SDreamerCodeEditor::GetLineToolTip(int32 LineNumber) const
+{
+    // Collect all errors for this line
+    TArray<FString> ErrorMessages;
+    
+    for (const TSharedPtr<FBuildError>& Error : CurrentFileErrors)
+    {
+        if (Error->GetLineNumber() == LineNumber)
+        {
+            ErrorMessages.Add(Error->GetMessage());
+        }
+    }
+    
+    if (ErrorMessages.Num() > 0)
+    {
+        return FText::FromString(FString::Join(ErrorMessages, TEXT("\n")));
+    }
+    
+    return FText::GetEmpty();
+}
+
+FSlateColor SDreamerCodeEditor::GetLineMarkerColor(int32 LineNumber) const
+{
+    // Check if there are any errors on this line
+    for (const TSharedPtr<FBuildError>& Error : CurrentFileErrors)
+    {
+        if (Error->GetLineNumber() == LineNumber)
+        {
+            if (Error->GetSeverity() == EBuildMessageSeverity::Error)
+            {
+                return FLinearColor::Red;
+            }
+            else if (Error->GetSeverity() == EBuildMessageSeverity::Warning)
+            {
+                return FLinearColor(1.0f, 0.8f, 0.0f); // Yellow
+            }
+        }
+    }
+    
+    // No errors on this line
+    return FLinearColor::Transparent;
 }
 
 #undef LOCTEXT_NAMESPACE

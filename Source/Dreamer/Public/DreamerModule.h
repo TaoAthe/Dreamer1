@@ -21,10 +21,18 @@ public:
 	/** Opens the C++ editor tab */
 	void OpenCppEditorTab();
 
+	/** Opens a file at a specific location */
+	void OpenFileAtLocation(const FString& FilePath, int32 LineNumber);
+
 private:
 	/** Registers menu extensions */
 	void RegisterMenus();
 
+	/** Callback for spawning the build errors tab */
+	TSharedRef<class SDockTab> OnSpawnBuildErrorsTab(const class FSpawnTabArgs& SpawnTabArgs);
+
 private:
 	TSharedPtr<class FUICommandList> PluginCommands;
+	TSharedPtr<class FBuildManager> BuildManager;
+	TSharedPtr<class SBuildErrorList> BuildErrorList;
 };
