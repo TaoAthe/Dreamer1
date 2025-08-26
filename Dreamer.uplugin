@@ -1,0 +1,24 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1",
+  "FriendlyName": "Dreamer",
+  "Description": "Integrated C++ development environment within Unreal Editor",
+  "Category": "Editor",
+  "CreatedBy": "Sarah",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": true,
+  "IsBetaVersion": true,
+  "IsExperimentalVersion": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "Dreamer",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    }
+  ]
+}
