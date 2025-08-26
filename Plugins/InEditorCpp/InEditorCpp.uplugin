@@ -1,0 +1,32 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "Native C++ Editor (ImGui)",
+  "Description": "Native in-editor C++ editor using ImGui, ImGuiColorTextEdit, and clangd for code intelligence",
+  "Category": "Programming",
+  "CreatedBy": "Your Name",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": true,
+  "IsBetaVersion": true,
+  "IsExperimentalVersion": false,
+  "EnabledByDefault": false,
+  "EngineVersion": "5.6.0",
+  "Modules": [
+    {
+      "Name": "InEditorCpp",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "ImGui",
+      "Enabled": true,
+      "Optional": true
+    }
+  ]
+}
