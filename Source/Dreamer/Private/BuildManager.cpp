@@ -13,6 +13,7 @@
 #include "ISourceCodeAccessModule.h"
 #include "Developer/HotReload/Public/IHotReload.h"
 #include "AssetRegistry/AssetRegistryModule.h"
+#include "OutputReaderRunnable.h"
 
 FBuildManager::FBuildManager()
     : BuildProgress(0.0f)

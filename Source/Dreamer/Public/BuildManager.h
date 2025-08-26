@@ -6,6 +6,8 @@
 #include "Styling/SlateStyle.h"
 #include "BuildError.h"
 
+class FOutputReaderRunnable;
+
 class FBuildManager : public TSharedFromThis<FBuildManager>
 {
 public:
@@ -42,6 +44,9 @@ public:
     /** Clears the build errors and warnings */
     void ClearBuildMessages();
 
+    /** Handle output from the UAT process */
+    void HandleUATOutput(FString Output);
+
     /** Delegate called when build starts */
     DECLARE_EVENT(FBuildManager, FBuildStartedEvent);
     FBuildStartedEvent& OnBuildStarted() { return BuildStartedEvent; }
@@ -61,9 +66,6 @@ public:
 private:
     /** Parses build output for errors and warnings */
     void ParseBuildOutput(const FString& Output);
-
-    /** Handles UAT process output */
-    void HandleUATOutput(FString Output);
 
     /** Event fired when build starts */
     FBuildStartedEvent BuildStartedEvent;
@@ -94,4 +96,13 @@ private:
 
     /** UAT process cancellation requested */
     bool bCancellationRequested;
+
+    /** Pipe for reading process output */
+    void* ReadPipe;
+    
+    /** Pipe for writing process output */
+    void* WritePipe;
+    
+    /** Thread for reading process output */
+    FRunnableThread* OutputReaderThread;
 };
