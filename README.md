@@ -1,31 +1,60 @@
 # Dreamer1 Unreal Project
 
-This repository contains the Dreamer1 Unreal Engine project, which includes a custom C++ editor plugin called InEditorCpp that provides additional functionality to the editor.
+This repository contains the Dreamer1 Unreal Engine project, which includes a custom C++ editor plugin called Dreamer that provides an integrated development environment within the Unreal Editor.
 
 ## Features
 
-- InEditorCpp plugin with ImGui integration for custom editor UI
-- clangd language service support for improved C++ editing
-- ImGuiColorTextEdit third-party dependency for code editing capabilities
+- **Dreamer Plugin**: Integrated C++ development environment within Unreal Editor
+  - Code editing with syntax highlighting
+  - File browser for project navigation
+  - Build system integration
+  - Error reporting and navigation
+  
+- **Visual Studio Tools Integration**: Enhanced IDE support
+  - Improved debugging capabilities
+  - Breakpoint management
+  - Project configuration
+
+- **ImGui Integration**: Custom editor UI for code editing and visualization
 
 ## Plugin Structure
 
-The main plugin (InEditorCpp) includes:
-- Core editor integration
-- ImGui-based UI elements (when ImGui is available)
-- Text editing capabilities
+The main plugins in this project include:
+
+- **Dreamer**: Core C++ IDE functionality
+  - Editor integration
+  - Build system
+  - Code editing
+
+- **VisualStudioTools**: Microsoft's official VS integration for Unreal Engine
+  - Enhanced debugging
+  - Better project integration
 
 ## Development Setup
 
 ### Requirements
-- Unreal Engine (compatible version)
-- Visual Studio or other compatible C++ IDE
+- Unreal Engine 5.6 or later
+- Visual Studio 2022 or later with these workloads:
+  - Game development with C++
+  - .NET desktop development
 - Git LFS (for large binary files)
 
 ### Getting Started
 1. Clone this repository
 2. Open the Dreamer1.uproject file with Unreal Engine
 3. If prompted to rebuild modules, select Yes
+4. If you encounter build issues, use the included rebuild scripts:
+   - ManualRebuild.bat: Full rebuild of the project
+   - FixImGui.bat: Fix ImGui plugin issues
+   - DeepClean.bat: Clean intermediate files
+
+## Documentation
+
+- **REBUILD_GUIDE.md**: Detailed instructions for rebuilding the project
+- **Plugins/Dreamer/Documentation/**:
+  - GettingStarted.md: Guide for using the Dreamer IDE
+  - DevelopmentLog.md: History of development and feature implementation
+  - BuildSystemIntegration.md: Technical details of the build system
 
 ## Contributing
 
