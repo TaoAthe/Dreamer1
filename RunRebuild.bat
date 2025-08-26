@@ -1,0 +1,3 @@
+@echo off
+echo Running Unreal Module Rebuild using PowerShell...
+powershell -ExecutionPolicy Bypass -File "%~dp0RebuildModules.ps1"
