@@ -41,6 +41,14 @@
       "SupportedTargetPlatforms": [
         "Win64"
       ]
+    },
+    {
+      "Name": "SourceCodeAccess",
+      "Enabled": true
+    },
+    {
+      "Name": "Dreamer",
+      "Enabled": true
     }
   ],
   "TargetPlatforms": [],
