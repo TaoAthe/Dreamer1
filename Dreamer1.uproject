@@ -43,8 +43,12 @@
       ]
     },
     {
-      "Name": "SourceCodeAccess",
+      "Name": "VisualStudioSourceCodeAccess",
       "Enabled": true
+    },
+    {
+      "Name": "SourceCodeAccess",
+      "Enabled": false
     },
     {
       "Name": "Dreamer",
