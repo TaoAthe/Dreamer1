@@ -53,19 +53,27 @@ The main plugins in this project include:
 
 If you encounter the "could not fetch all available targets from the unreal build tool" error:
 
-1. **Diagnose the Issue**:
+1. **Quick Fix (Try First)**:
+   - Run `DirectUBTFix.bat` for a direct fix of the most common causes
+   - This script fixes registry entries, plugin dependencies, and environment settings
+
+2. **Dependency Fix (For .NET Issues)**:
+   - Run `FixUBTDependencies.bat` if the error is related to .NET dependencies
+   - This script creates assembly binding redirects and ensures DLLs are in the right places
+
+3. **Diagnostic Approach**:
    - Run `DiagnoseUBTIssue.bat` to identify the specific cause
    - The script will create targeted fix scripts based on its findings
 
-2. **Fix the Issue**:
-   - Run `FixUBTTargetError.bat` for a targeted fix
-   - If that doesn't resolve the issue, run `EnhancedUBTFix.bat` (created by the diagnostic script)
+4. **Last Resort**:
+   - Try `EnhancedUBTFix.bat` (created by the diagnostic script) for a comprehensive solution
 
 These scripts address common issues like:
-- Missing .NET dependencies
+- Missing or mismatched .NET dependencies
 - Corrupted build rule files
 - Plugin dependency problems
 - Environment configuration issues
+- Registry problems
 
 ## Documentation
 
