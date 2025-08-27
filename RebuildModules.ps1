@@ -49,11 +49,37 @@ foreach ($PluginPath in $PluginsToClean) {
     }
 }
 
-# Try to ensure System.CodeDom is available
+# Check for required .NET dependencies (FIXED VERSION)
 Write-Host "Checking for required .NET dependencies..." -ForegroundColor Yellow
-if (-not [System.AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { $_.GetName().Name -eq "System.CodeDom" }) {
-    Write-Host "System.CodeDom not loaded. This might cause build issues." -ForegroundColor Yellow
-    Write-Host "Using alternative build method to avoid System.CodeDom dependency issues." -ForegroundColor Cyan
+
+try {
+    # Fixed: Proper PowerShell syntax for checking loaded assemblies
+    $loadedAssemblies = [System.AppDomain]::CurrentDomain.GetAssemblies()
+    $systemCodeDomLoaded = $false
+    
+    foreach ($assembly in $loadedAssemblies) {
+        if ($assembly.GetName().Name -eq "System.CodeDom") {
+            $systemCodeDomLoaded = $true
+            break
+        }
+    }
+    
+    if (-not $systemCodeDomLoaded) {
+        Write-Host "System.CodeDom not loaded. This might cause build issues." -ForegroundColor Yellow
+        Write-Host "Attempting to load System.CodeDom..." -ForegroundColor Cyan
+        
+        try {
+            Add-Type -AssemblyName "System.CodeDom"
+            Write-Host "Successfully loaded System.CodeDom" -ForegroundColor Green
+        } catch {
+            Write-Host "Warning: Could not load System.CodeDom: $_" -ForegroundColor Yellow
+            Write-Host "Using alternative build method to avoid System.CodeDom dependency issues." -ForegroundColor Cyan
+        }
+    } else {
+        Write-Host "System.CodeDom is already loaded" -ForegroundColor Green
+    }
+} catch {
+    Write-Host "Warning: Error checking .NET dependencies: $_" -ForegroundColor Yellow
 }
 
 # Check for the UnrealVersionSelector executable
