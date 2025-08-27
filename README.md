@@ -45,8 +45,27 @@ The main plugins in this project include:
 3. If prompted to rebuild modules, select Yes
 4. If you encounter build issues, use the included rebuild scripts:
    - ManualRebuild.bat: Full rebuild of the project
+   - FixUnrealBuildTool.bat: Fix issues with the Unreal Build Tool
    - FixImGui.bat: Fix ImGui plugin issues
    - DeepClean.bat: Clean intermediate files
+
+### Troubleshooting Build Issues
+
+If you encounter the "could not fetch all available targets from the unreal build tool" error:
+
+1. **Diagnose the Issue**:
+   - Run `DiagnoseUBTIssue.bat` to identify the specific cause
+   - The script will create targeted fix scripts based on its findings
+
+2. **Fix the Issue**:
+   - Run `FixUBTTargetError.bat` for a targeted fix
+   - If that doesn't resolve the issue, run `EnhancedUBTFix.bat` (created by the diagnostic script)
+
+These scripts address common issues like:
+- Missing .NET dependencies
+- Corrupted build rule files
+- Plugin dependency problems
+- Environment configuration issues
 
 ## Documentation
 
@@ -55,6 +74,7 @@ The main plugins in this project include:
   - GettingStarted.md: Guide for using the Dreamer IDE
   - DevelopmentLog.md: History of development and feature implementation
   - BuildSystemIntegration.md: Technical details of the build system
+- **TODO.md**: Current status and future development plans
 
 ## Contributing
 
