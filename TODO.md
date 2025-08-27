@@ -28,7 +28,8 @@ This document outlines the current status of features in the Dreamer1 project an
 ## Todo Items
 
 ### High Priority
-- [ ] Fix remaining plugin dependency issues
+- [ ] Fix "could not fetch all the available targets from the unreal build tool" error
+- [ ] Fix remaining plugin dependency issues with InEditorCpp and SourceCodeAccess
 - [ ] Complete code completion feature
 - [ ] Add real-time error highlighting (as you type)
 - [ ] Implement multi-tab editing support
@@ -38,12 +39,43 @@ This document outlines the current status of features in the Dreamer1 project an
 - [ ] Add "Find All References" capability
 - [ ] Create find/replace feature
 - [ ] Improve breakpoint handling with Visual Studio integration
+- [ ] Update ImGui to latest version (1.89+) for improved features
 
 ### Low Priority
 - [ ] Add code folding
 - [ ] Implement variable watches for debugging
 - [ ] Create symbol navigation
 - [ ] Add hover information for symbols
+- [ ] Optimize ImGui rendering performance in editor
+
+## ImGui Integration Tasks
+
+### Fixes Needed
+- [ ] Fix ImGui plugin compatibility with Unreal 5.6
+- [ ] Resolve world context issues with ImGui integration (see FixWorldContext.bat)
+- [ ] Ensure proper cleanup of ImGui resources when editor is closed
+- [ ] Fix memory leaks in ImGui integration
+
+### Enhancements
+- [ ] Implement custom ImGui widgets for code editing
+- [ ] Add theme support for ImGui interface
+- [ ] Create dockable ImGui windows within Unreal Editor
+- [ ] Improve ImGui font rendering for better readability
+- [ ] Add support for ImGui plots and visualization tools for debugging
+
+## Build System Tasks
+
+### Fixes Needed
+- [ ] Fix "could not fetch all the available targets" error in Unreal Build Tool
+- [ ] Improve error handling in rebuild scripts
+- [ ] Fix plugin dependency chain to avoid startup errors
+- [ ] Ensure proper cleaning of intermediate files during rebuild
+
+### Enhancements
+- [ ] Add incremental build support
+- [ ] Implement parallel compilation for faster builds
+- [ ] Create more detailed build logs for troubleshooting
+- [ ] Add build presets for different configurations
 
 ## Development Roadmap
 
@@ -71,11 +103,15 @@ This document outlines the current status of features in the Dreamer1 project an
 - ? Plugin installed and configured
 - ? Basic integration with Dreamer IDE
 - ? Enhanced debugging features (in progress)
+- [ ] Improve breakpoint synchronization
+- [ ] Add test explorer integration
 
 ### ImGui Integration
 - ? Basic UI rendering
 - ? Custom editor widgets (in progress)
 - ? Advanced visualization tools (planned)
+- [ ] Fix rendering issues with different DPI settings
+- [ ] Implement ImGui input event handling improvements
 
 ## Documentation Status
 
@@ -84,3 +120,5 @@ This document outlines the current status of features in the Dreamer1 project an
 - ? BuildSystemIntegration.md
 - ? REBUILD_GUIDE.md
 - ? User Manual (in progress)
+- [ ] Create troubleshooting guide for common issues
+- [ ] Document ImGui widget creation workflow
