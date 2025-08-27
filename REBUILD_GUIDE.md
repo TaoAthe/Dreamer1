@@ -17,9 +17,25 @@ This script performs a complete rebuild process:
 - Builds plugins and main project
 - Launches Unreal Engine
 
-### Option 2: Manual Rebuild Steps
+### Option 2: Fix "Could Not Fetch Available Targets" Error
 
-If the script doesn't work, follow these steps manually:
+If you're experiencing the "could not fetch all the available targets from the unreal build tool" error:
+
+1. Close Unreal Engine and Visual Studio
+2. Run `FixUnrealBuildTool.bat` as administrator
+3. Follow the prompts in the script
+4. When completed, try opening your project again
+
+This specialized script addresses the target fetching issue by:
+- Properly setting up the environment for the Unreal Build Tool
+- Ensuring all required .NET dependencies are available
+- Fixing permissions and cleaning problematic files
+- Creating a customized build environment
+- Rebuilding all required modules with the correct configuration
+
+### Option 3: Manual Rebuild Steps
+
+If the scripts don't work, follow these steps manually:
 
 1. **Clean Intermediate Files**
    - Delete the following directories:
@@ -103,11 +119,17 @@ If you encounter merge conflicts:
 
 ## Plugins in this Project
 
-### InEditorCpp
+### Dreamer
 Your custom editor plugin that provides in-editor C++ functionality.
+
+### InEditorCpp
+Extended C++ editing capabilities for Unreal Engine.
 
 ### UnrealImGui-IMGUI_1.74
 Provides ImGui integration for creating custom UI in the Unreal Editor.
+
+### VisualStudioTools
+Microsoft's official Visual Studio integration plugin for enhanced debugging and project management.
 
 ## Troubleshooting
 
@@ -116,6 +138,11 @@ Provides ImGui integration for creating custom UI in the Unreal Editor.
 - Make sure Visual Studio has the necessary workloads installed:
   - Game development with C++
   - .NET desktop development
+
+### "Could not fetch all the available targets from the unreal build tool"
+- Run the `FixUnrealBuildTool.bat` script specifically designed to fix this issue
+- The script creates a proper environment setup and rebuilds all necessary modules
+- If the script doesn't work, check the log file it generates for more detailed error information
 
 ### "The following modules are missing or built with a different engine version"
 - Select "Yes" to rebuild modules
