@@ -109,7 +109,7 @@ if (Test-Path $DotnetRoot) {
     $env:DOTNET_CLI_TELEMETRY_OPTOUT = 1
     $env:DOTNET_NOLOGO = 1
     $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 1
-    Write-Host "DOTNET_ROOT: $DotnetRoot" -ForegroundColor Green
+    Write-Host "DOTNET_ROOT: $DotletRoot" -ForegroundColor Green
 }
 
 # Create logs directory
@@ -250,10 +250,9 @@ $Result3 = Invoke-UBTCommand -CommandName "Build $Target" -Arguments @(
     "-Log=`"$LogFile`""
 ) -LogPath $TimestampedLog
 
-# Command 4: List target files
-$Result4 = Invoke-UBTCommand -CommandName "List Target Files" -Arguments @(
-    "-Mode=ListTargetFiles",
-    "-Project=`"$ProjectPath`"",
+# Command 4: List build options instead of ListTargetFiles (which doesn't exist)
+$Result4 = Invoke-UBTCommand -CommandName "List Build Options" -Arguments @(
+    "-ListBuildOptions",
     "-Verbose",
     "-Log=`"$LogFile`""
 ) -LogPath $TimestampedLog
@@ -269,7 +268,7 @@ Write-Host "Results Summary:" -ForegroundColor Cyan
 Write-Host "  Query Targets:       Exit Code $($Result1.ExitCode)" -ForegroundColor $(if ($Result1.ExitCode -eq 0) { "Green" } else { "Red" })
 Write-Host "  Generate Projects:   Exit Code $($Result2.ExitCode)" -ForegroundColor $(if ($Result2.ExitCode -eq 0) { "Green" } else { "Red" })
 Write-Host "  Build $Target`:        Exit Code $($Result3.ExitCode)" -ForegroundColor $(if ($Result3.ExitCode -eq 0) { "Green" } else { "Red" })
-Write-Host "  List Target Files:   Exit Code $($Result4.ExitCode)" -ForegroundColor $(if ($Result4.ExitCode -eq 0) { "Green" } else { "Red" })
+Write-Host "  List Build Options:  Exit Code $($Result4.ExitCode)" -ForegroundColor $(if ($Result4.ExitCode -eq 0) { "Green" } else { "Red" })
 Write-Host ""
 
 # Analyze results
@@ -291,7 +290,7 @@ if ($Result3.ExitCode -ne 0) {
 }
 
 if ($Result4.ExitCode -ne 0) {
-    Write-Host "WARNING: List target files failed with exit code $($Result4.ExitCode)" -ForegroundColor Yellow
+    Write-Host "WARNING: List build options failed with exit code $($Result4.ExitCode)" -ForegroundColor Yellow
     $HasErrors = $true
 }
 
@@ -318,4 +317,4 @@ if ($Response -eq "y" -or $Response -eq "Y") {
 }
 
 Write-Host ""
-Write-Host "Script completed." -ForegroundColor Green
+Write-Host "Script completed." -ForegroundColor GreenWrite-Host "Script completed." -ForegroundColor Green

@@ -159,17 +159,17 @@ set "BUILD_RESULT=%ERRORLEVEL%"
 echo Build result: %BUILD_RESULT%
 echo.
 
-:: Command 4: List target files for diagnostics
+:: Command 4: List build options for diagnostics
 echo ----------------------------------------
-echo Command 4: Listing target files
+echo Command 4: Listing build options
 echo ----------------------------------------
-echo "%UBT_BINARY%" -Mode=ListTargetFiles -Project="%PROJECT_PATH%" -Verbose -Log="%LOG_FILE%"
+echo "%UBT_BINARY%" -ListBuildOptions -Verbose -Log="%LOG_FILE%"
 echo.
 
-"%UBT_BINARY%" -Mode=ListTargetFiles -Project="%PROJECT_PATH%" -Verbose -Log="%LOG_FILE%" >> "%TIMESTAMPED_LOG%" 2>&1
-set "LISTFILES_RESULT=%ERRORLEVEL%"
+"%UBT_BINARY%" -ListBuildOptions -Verbose -Log="%LOG_FILE%" >> "%TIMESTAMPED_LOG%" 2>&1
+set "LISTOPTIONS_RESULT=%ERRORLEVEL%"
 
-echo List target files result: %LISTFILES_RESULT%
+echo List build options result: %LISTOPTIONS_RESULT%
 echo.
 
 echo.
@@ -182,7 +182,7 @@ echo Results Summary:
 echo   Query Targets:       Exit Code %QUERY_RESULT%
 echo   Generate Projects:   Exit Code %PROJECTFILES_RESULT%
 echo   Build Editor:        Exit Code %BUILD_RESULT%
-echo   List Target Files:   Exit Code %LISTFILES_RESULT%
+echo   List Build Options:  Exit Code %LISTOPTIONS_RESULT%
 echo.
 
 if %QUERY_RESULT% NEQ 0 (
@@ -197,8 +197,8 @@ if %BUILD_RESULT% NEQ 0 (
     echo WARNING: Build failed with exit code %BUILD_RESULT%
 )
 
-if %LISTFILES_RESULT% NEQ 0 (
-    echo WARNING: List target files failed with exit code %LISTFILES_RESULT%
+if %LISTOPTIONS_RESULT% NEQ 0 (
+    echo WARNING: List build options failed with exit code %LISTOPTIONS_RESULT%
 )
 
 echo.
