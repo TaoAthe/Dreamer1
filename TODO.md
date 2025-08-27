@@ -28,7 +28,7 @@ This document outlines the current status of features in the Dreamer1 project an
 ## Todo Items
 
 ### High Priority
-- [ ] Fix "could not fetch all the available targets from the unreal build tool" error
+- ? Fix "could not fetch all the available targets from the unreal build tool" error
 - [ ] Fix remaining plugin dependency issues with InEditorCpp and SourceCodeAccess
 - [ ] Complete code completion feature
 - [ ] Add real-time error highlighting (as you type)
@@ -66,7 +66,7 @@ This document outlines the current status of features in the Dreamer1 project an
 ## Build System Tasks
 
 ### Fixes Needed
-- [ ] Fix "could not fetch all the available targets" error in Unreal Build Tool
+- ? Fix "could not fetch all the available targets" error in Unreal Build Tool
 - [ ] Improve error handling in rebuild scripts
 - [ ] Fix plugin dependency chain to avoid startup errors
 - [ ] Ensure proper cleaning of intermediate files during rebuild
